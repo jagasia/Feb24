@@ -563,3 +563,293 @@ Order of constructors
 	Super class constructor is invoked before the sub class constructor
 	Because, basically an object of super class is created first
 
+
+
+
+i want to learn java.
+	can you tell me what are the chapters you are covering in your course?
+
+	1. llll
+	2. lkjlkdjfkds
+	3. lajsdflkjsdfksdf
+	4. popujoisadfsdfsdf
+	5. a;lskdjfsdkjf
+
+
+Only the name of the chapters. Not the content of the chapters
+
+They will even give you the pamplet that contains chapter names to take away
+They will not give you the book to take away
+
+Interface is just the declaration of methods present in the original class
+
+
+every method in an interface is public ONLY. 		even if you do not specifiy public also
+every data member in an interface is 
+		public static final			ONLY
+
+an interface can contain NO VARIABLE. BUT only CONSTANTS
+
+
+interface Person
+{
+	int age=20;		//NOTE value must be provided
+	void speak();	//there is no body		i didnt use "abstract" here but it is 
+}
+
+class Student implements Person
+{
+	public void speak()			//error because, overriding method cannot be less accessible
+	{
+		System.out.println("Student speaks");
+	}	
+}
+
+
+
+
+In java 8
+
+an interface METHOD can contain body if:
+	the method is static
+	the method is declared as default
+
+
+
+
+
+
+-------------------------------
+
+
+interface A
+{
+	static void display()
+	{
+		System.out.println("Display method of interface A is called");
+	}
+	default void speak()
+	{
+		System.out.println("Interface A speaks");
+	}
+}
+
+class Aimpl implements A
+{
+	public void display()
+	{
+		System.out.println("THis is A display");
+	}
+	public void speak()
+	{		
+		System.out.println("My way high way");
+	}
+}
+
+public class Main4 {
+
+	public static void main(String[] args) {
+		Aimpl a=new Aimpl();
+		a.display();
+		a.speak();
+	}
+
+}
+
+---------------------------------
+Types of interfaces:
+	1) Marker Interface
+	2) Functional Interface
+
+Marker:
+-------
+	A interface that does not have any abstract methods, is called as Marker interface
+	This is used for type inference
+
+ex:
+	Serializable			(is a marker interface, because, it does not have any abstract methods)
+	
+	class A implements Serializable
+
+	A a=new A();		//object of A that implements Serializable interface
+	a instanceof Serializable		returns true
+
+
+
+
+Serializable []arr=new Serializable[10];
+	arr[0]=new A();
+	arr[1]=new B();
+	arr[2]=new A();
+
+
+Functional Interface:
+-------------------
+An interface that has only 1 abstract method is called as Functional Interface
+
+ex:
+	Runnable	interface contains only run() method
+
+Why functional interface is significant?
+	Functional interfaces can be implemented using lambda
+
+the implementation of a functional interface can be done in :
+1)
+		MyInterface x=new MyInterfaceImpl();
+		x.doThis();
+-----------
+2)
+//		MyInterface x=new MyInterface() {
+//			
+//			@Override
+//			public void doThis() {
+//				System.out.println("Hi world");
+//				
+//			}
+//		};
+//		x.doThis();
+
+------------------
+3)
+		MyInterface x=()->{
+			System.out.println("Hi this is my lambda implementation");
+		};
+		x.doThis();
+---------------------
+
+
+
+How to  reverse a String?
+1) StringBuilder or StringBuffer
+	has a method called reverse
+
+2) String class has charAt(index) method
+	loop the characters from last element to index 0
+
+
+How to reverse the words like
+	I Love India
+	India Love I
+
+answ:
+	Split the string by "space". You will get array of strings
+	loop from last element of the array to first element of the array
+
+-------------------------------------------------------
+
+in C language
+	int x=0;
+	if(x)
+		puts("100");
+	else
+		puts("500");			//500 is the answer
+
+in C language,
+	0 is considered as false. Any non 0 is true
+
+But in Java
+	int x=0;
+	if(x)				this is not allowed
+
+But in Java
+	boolean x=false;
+	if(x)				this is ALLOWED
+
+	
+----------------------------------
+
+Strings
+	there is no null terminator \0	at the end of a string like c, c++ language
+	we use "" for strings
+	
+	String is immutable. Immutable means, we cannot change
+	
+
+	String str="hello";		here we have created an object
+	str="world";			here we have created another object whose reference is stored in str
+	
+	a new object of String is created whenever you assign a new value;
+
+	"world" 	this itself is an object
+	"hello"		this itself is an object
+	
+	str="20";
+			a string literal is an object
+
+	so what? i am able to change. so i am comfortable with String. no issues.....
+
+	str=" A very large paragraph of hundreds of line like we type in a notepad";
+
+Updating a string like
+	insert in between
+	replace
+	delete some of the characters
+	
+	those operations cannot be performed in String object.
+
+This is where, we understand that there is a need for
+	StringBuilder
+	StringBuffer
+
+Both StringBuilder and StringBuffer classes have same set of properties and methods
+
+Then what is the only difference between these 2 classes?????
+StringBuffer is synchronized			StringBuilder is not synchronized
+
+What is meant by synchronized?
+	when multiple threads access an object simultaneously at a time, only 1 thread is allowed to access. Other threads are made to wait.
+
+This is also called as thread safe.
+
+Since StringBuffer provided thread lock, it is slow.
+StringBuilder is fast. But not thread safe. So in single threaded processes, StringBuilder is preferred.
+
+Lets see some of the StringBuilder methods
+
+toString()		returns the string inside the string builder
+constructor()		accepts a string and appends it into the string builder
+reverse()		reverses the string
+append()		accepts a string as parameter and appends to the end of the existing string
+insert()
+replace()
+delete()
+setCharAt()
+indexOf
+lastIndexOf
+equals
+
+
+Task:
+String str="There is a problem. And the problem is not clear. For every problem there is a solution";
+
+Replace all the occurrance of "is" with "was".
+
+
+
+------------------
+An sms came like
+"Please note the number 989898989 and call this number. if it is not working, call 67676767676. "
+From this string, how to extract only numbers
+
+
+		String str="Please note the number 989898989 and call this number. if it is not working, call 67676767676. ";
+		//		[0-9]+		
+		//		\\d+
+		//		\\d{1,}
+		//all the above expressions match with 1 or more digit numbers
+		Pattern pattern=Pattern.compile("[0-9]+");
+		Matcher matcher = pattern.matcher(str);
+		while(matcher.find())
+			System.out.println(matcher.group());
+
+
+----------------------------
+Accept email address as input and validate if it is a valid email address or not
+
+		Scanner sc=new Scanner(System.in);
+		String email=sc.next();
+		String pattern="[a-z]+([.][a-z]+)?[@][a-z]+[.](([a-z]{3})|([a-z]{2}[.][a-z]{2}))";
+		if(email.matches(pattern))
+			System.out.println("Valid");
+		else
+			System.out.println("Invalid");
