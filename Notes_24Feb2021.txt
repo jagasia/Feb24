@@ -1,0 +1,565 @@
+class Employee
+{
+	int employeeId;			//why public / private is not mentioned. In that case, it is default scope
+					//means, it is accessible only within the same package
+					//call it as package scope
+}
+
+Class is a blueprint for creating objects.	
+We create a class. We create many objects for that class.
+
+Employee is a class
+
+Employee raja=new Employee();			//one object of Employee class
+Employee siva=new Employee();			//another object of Employee class
+
+A football game.
+
+we need to define the game as objects interacting with other object
+
+Player
+Ball
+Goal post
+Ground
+
+when i define Player object, there may be 11 instance of Players.
+
+class Player
+
+Player ronaldo=new Player();
+
+objects have 
+	identity			id, name, role, jerseyNo, dateOfBirth
+	behavior			run, block, kickBall
+
+customer purchase product
+
+cid, pid, date, qty
+
+information related to that object
+	data members
+behavior 
+	methods
+
+
+-----------------
+Access modifiers
+Methods
+exit from a method
+return value/ref from a method
+
+static block	initialization blocks
+static variable
+static method
+
+
+Field encapsulation, accessor and mutator
+when you declare variables as non public in a class. You are encapsulating those variables from external world.
+To allow access to the non public data members of a class, we use
+	Accessors		getter methods
+	Mutators		setter methods
+
+
+Overloading
+
+Constructors
+Constructor overloading
+Initial state initializers
+chaining constructors		constructor order
+
+
+
+//		Employee emp=new Employee();		//the same can be done in 2 steps as below:
+		Employee emp;			//emp is a stack variable. if you see what is inside this variable, a null is found. It is a null pointer. No heeap is allocated at this stage.
+		emp=new Employee();		//new Employee() is an object created in Heap. Its reference is kept in emp (stack variable)
+
+emp is a reference variable. 
+
+Access specifiers truth table:
+
+		Same class	diff class of Same package	(Sub class Any package)	Anywhere	
+private		YES		NO					NO		NO
+default		YES		YES					NO		NO
+protected	YES		YES					YES		NO
+public		YES		YES					YES		YES
+
+
+protected	=	default	+ sub class of any package
+
+Methods:
+	What is a method in java?		It is similar to functions in C, C++, Java script.
+	We cannot write executable code directly in a class
+
+class Employee
+{
+	int employeeId=1*2;			//1*2 is an executable code.
+}
+
+Only inside a method, we can write executable code.
+methods provide modularity for the program.
+reusability
+
+
+public class Main2 {
+
+	{	//this is called as instance block. instance=object
+		System.out.println("Hello world");
+	}
+	
+	public static void main(String[] args) {
+		Main2 m2=new Main2();
+		System.out.println("India");
+	}
+
+}
+
+When we create instance of a class, the instance blocks are executed.
+
+--------------------------
+package mphasis;
+
+public class Main2 {
+
+	{	//this is called as instance block. instance=object
+		System.out.println("instance block");
+	}
+	
+	static
+	{
+		System.out.println("This is static block");
+	}
+	
+	public static void main(String[] args) {
+		Main2 m2=new Main2();
+		System.out.println("India");
+	}
+
+}
+
+......
+static block is executed first
+so the output is:-
+
+This is static block
+instance block
+India
+
+============
+package mphasis;
+
+public class Main2 {
+
+	{	//this is called as instance block. instance=object
+		System.out.println("instance block");
+	}
+	
+	static
+	{
+		System.out.println("This is static block");
+	}
+	
+	public static void main(String[] args) {
+//		Main2 m2=new Main2();
+		System.out.println("India");
+	}
+
+}
+for this the output will be
+
+This is static block
+India
+
+
+Because, static block is executed, even if any object is not created for the class
+
+what is static?
+	does not belong to any object of the class
+
+
+In java, 
+	we cannot create static variable inside a method
+
+
+
+static block
+static variable
+static method
+
+
+
+package mphasis;
+
+public class Student {
+	private int studentId;		
+	private String name;			//name is instance variable
+	static String collegeName;		//collegeName is static variable
+}
+
+
+
+		Student.collegeName="LPU";	//allowed? why?	static member is accessible without object
+		Student.name="Akshar";		//not allowed? why?
+
+
+
+collegeName is static. It belongs to the class. Not to any object
+name is not static. THat means it is instance variable
+
+int sum(int i, int j)
+{
+	return i+j;
+}
+
+
+int result=sum(2,3);			will return 5
+
+
+Double.parseDouble(String)		converts String into double
+Double.valueOf(String)			converts String into Double
+
+
+
+----------------
+Overloading
+	public int sum(int i, int j)
+	{
+		return i+j;
+	}
+	public float sum(float i, float j)
+	{
+		return i+j;
+	}
+
+same name but different signature.
+This is called as overloading
+
+Rules for overloading?
+1) the parameters can be different data types
+2) number of parameters can be different
+3) order of data type of parameters can be different
+
+The return type can be same or different.
+
+
+
+
+
+------------------------
+		//Perfect,Classical,04:23,4.6
+		Song song=new Song();				// no arg constructor is used to create Song
+		String[] arr = line.split(",");
+		song.setTitle(arr[0]);
+		song.setGenre(arr[1]);
+		// to convert "04.23" string into Date, we need simple date format
+		SimpleDateFormat sdf=new SimpleDateFormat("mm:ss");
+		Date d = sdf.parse(arr[2]);
+		song.setDuration(d);
+		
+		//"4.6" string should be converted into Double
+		Double r=Double.valueOf(arr[3]);					//99% of programmers use Double.parseDouble
+		song.setRating(r);
+
+----------------------------
+String title;
+		String genre;
+		Date duration;
+		Double rating;
+		String[] arr = line.split(",");
+		title=arr[0];
+		genre=arr[1];
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("mm:ss");		
+		duration=sdf.parse(arr[2]);
+		
+		rating=Double.valueOf(arr[3]);
+		
+		
+		Song song=new Song(title, genre, duration, rating);
+=-=======================
+package mphasis;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Song {
+	private String title;
+	private String genre;
+	private Date duration;
+	private Double rating;
+	public Song() {
+		//something is already coded here...
+		System.out.println("No arg constructor is invoked");
+	}
+	
+	public Song(String title, String genre) {
+		this();
+		System.out.println("2 arg constructor is invoked");
+		this.title = title;
+		this.genre = genre;
+	}
+
+	public Song(String title, String genre, Date duration, Double rating) {
+		this(title, genre);				//this will call the constructor (without arg) in this case
+		System.out.println("4 arg constructor is invoked");
+		this.duration = duration;
+		this.rating = rating;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public Date getDuration() {
+		return duration;
+	}
+	public String getDuration1()
+	{
+		SimpleDateFormat sdf=new SimpleDateFormat("mm:ss");
+		return sdf.format(this.duration);
+	}
+	public void setDuration(Date duration) {
+		this.duration = duration;
+	}
+	public Double getRating() {
+		return rating;
+	}
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+	
+	@Override
+	public String toString() {
+		return "Song [title=" + title + ", genre=" + genre + ", duration=" + getDuration1() + ", rating=" + rating + "]";
+	}
+	static Song createSong(String line) throws ParseException			//this method returns a Song object
+	{
+		
+		String title;
+		String genre;
+		Date duration;
+		Double rating;
+		String[] arr = line.split(",");
+		title=arr[0];
+		genre=arr[1];
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("mm:ss");		
+		duration=sdf.parse(arr[2]);
+		
+		rating=Double.valueOf(arr[3]);
+		
+		//all dependencies are readily available before constructing the object. Here, we use constructor injection
+		Song song=new Song(title, genre, duration, rating);
+		return song;
+	}
+}
+
+-------------the above code is constructor chaining
+
+
+What is inheritance?
+	We create a class from existing class.
+	We dont need to create a class from the scratch.
+	A sub class derives 
+		properties
+		methods
+	from the super class
+
+	When should we do inheritance?
+		Only when the sub class has "kind of" relationship with the super class.
+		
+	class Student
+	{
+		Address address;			//Address is another class
+	}
+
+	can we do this in inheritence way?
+
+	class Student extends Address
+	{
+	}
+
+	No. Because, Student is not a kind of Address
+
+	Student has Address. "has" relationship (also called as "part of") can be represented as 
+	class Student
+	{
+		Address address;			//Address is another class
+	}
+
+
+	class JavaStudent extends Student
+	{}
+
+	here, JavaStudent is a kind of Student. So inheritance is done
+
+	When we create an object of JavaStudent, we are also creating an object of Student
+
+	JavaStudent rama=new JavaStudent();
+	rama is a JavaStudent.
+	rama is also a Student
+
+	So When we create an object of JavaStudent, we are also creating an object of Student
+
+	"extends" to do inheritance
+
+
+Task:
+--------
+Create a "Furniture" class 
+	name, color 	(both are String)
+
+methods;
+	acceptDetails()				accept input for name and color
+	displayDetails()			display name and color
+
+Create a "Chair" class that inherits Furniture class
+	noOfLegs	(int)
+
+Create a "BookShelf" class that inherits Furniture class
+	noOfShelves	(int)
+
+Override the acceptDetails() and displayDetails() methods in both the sub classes
+
+create a Main class and main method
+	allow the user to choose 
+		1: Chair
+		2: Book Shelf
+
+call the methods in main method
+
+
+A class has some data members
+	some times they are value types
+	some times they are reference type
+
+	They are called as dependencies
+
+we can inject the dependencies via:
+	constructor
+	setters
+
+When an employee joins organisation. THey may produce all documents initially or later.
+
+Sometimes, you create object and then inject the dependencies using setter methods
+Sometimes, you have all dependencies readily available so that you can inject them during construction itself
+
+
+------------------------------------
+
+Creating a singleton class
+	What is a singleton class?
+	A class that has only 1 object
+
+Ex:		Runtime
+
+
+To create a singleton class, we first should restrict users from creating an object.
+make the constructor as private. Users cannot create an object of the class.
+
+
+static methods cannot access instance variables. Because, we can call static method, even before creating any instance. vice versa is possible
+
+
+
+
+Extends is used? because, by inheritance, we want to extend the functionality defined in the super class
+Overriding
+
+Rules for overriding:
+1) Overriding method (sub class method) should not be less accessible
+	if super class method is public, then sub class method cannot be anything lesser than public
+	private	< default < protected < public
+
+	ie., the overriding method, cannot reduce the visibility
+
+2) the sub class method (overriding method) must match in signature and return type
+3) the overriding method, cannot throw new exceptions
+
+
+To verify all these rules, we can use @Override annotation
+
+---------Dynamic polymorphism-----------------
+
+Employee raja;
+raja=new Programmer();
+raja=new Developer();
+raja=new ProjectManager();
+raja=new Director();
+
+-------------------------------------
+Task:
+------
+
+abstract class Shape
+{
+	private String name;
+	private String borderColor;
+	private String fillColor;
+
+	//why should we write a dummy method in Shape??????
+	public abstract void calculateArea();			//notice that there is no body
+}
+
+
+public class Rectange extends Shape{
+	public void calculateArea()
+	{
+		System.out.println("Rectange area is calculated using length * breadth");
+	}
+}
+
+
+
+public class Triangle extends Shape {
+
+	public void calculateArea()
+	{
+		System.out.println("Triangle area is 1/2*breadth*height");
+	}
+}
+
+
+what is the need for abstract method?
+	the formula is different for different shapes. So i cannot write a formula in Shape class. But in order to make this method available in sub classes, i need to define.
+
+An abstract class forces the sub classes to override all the abstract methods present.
+
+
+-----------------
+Final class is final in the hierarchy of inheritance
+So a class cannot inherit a final class.
+
+what about final method???
+a final method cannot be overridden.
+
+If a class is final, then there is no sub class for that class. So no need to mention final in methods. 
+There is no sub class means, there is no overriding
+
+-------------
+what is final variable?		Yesterday i told TRUE LIE
+final int i=20;				means i is constant
+
+in java, constants are FULL CAPS
+
+so
+final int MARKS=20;			MARKS is full capital because it is final
+
+so you understand 
+	final class
+	final method
+	final variable
+
+
+-------------
+Order of constructors
+	Super class constructor is invoked before the sub class constructor
+	Because, basically an object of super class is created first
+
